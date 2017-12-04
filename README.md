@@ -1,6 +1,6 @@
 # lctn
 
-lctn is a simple command line program to run a process in linux container. It focuses on a brief golang code description of how to implement a linux container runtime.
+lctn is a simple command line program to run a process in a linux container. It focuses on a brief golang code description of how to implement a linux container runtime.
 
 # Usage
 
@@ -11,6 +11,7 @@ $ go get github.com/chenchun/lctn
 $ cd $GOPATH/src/github.com/chenchun/lctn
 $ make
 github.com/chenchun/lctn
+# run the following command to exec a shell inside a container
 $ ./lctn -logtostderr -root `pwd`/rootfs /bin/sh
 / # env
 SHLVL=1
@@ -19,6 +20,27 @@ PWD=/
 / # ls
 bin      dev      etc      hello    lib      linuxrc  proc     sbin     sys      usr      var
 / # exit
+```
+
+```
+lctn [Flags] command [argument ...]
+Flags:
+  -alsologtostderr
+    	log to standard error as well as files
+  -log_backtrace_at value
+    	when logging hits line file:N, emit a stack trace
+  -log_dir string
+    	If non-empty, write log files in this directory
+  -logtostderr
+    	log to standard error instead of files
+  -root string
+    	the root directory of container
+  -stderrthreshold value
+    	logs at or above this threshold go to stderr
+  -v value
+    	log level for V logs
+  -vmodule value
+    	comma-separated list of pattern=N settings for file-filtered logging
 ```
 
 # Note
