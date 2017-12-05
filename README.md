@@ -7,12 +7,12 @@ lctn is a simple command line program to run a process in a linux container. It 
 Be sure to run as a root user since creating namespace requires SYS_ADMIN capability.
 
 ```
-$ go get github.com/chenchun/lctn
+$ go get github.com/chenchun/lctn/flags
 $ cd $GOPATH/src/github.com/chenchun/lctn
 $ make
 github.com/chenchun/lctn
 # run the following command to exec a shell inside a container
-$ ./lctn -logtostderr -root `pwd`/rootfs /bin/sh
+$ bin/lctn -logtostderr -root `pwd`/rootfs /bin/sh
 / # env
 SHLVL=1
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
