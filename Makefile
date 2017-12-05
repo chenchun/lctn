@@ -1,5 +1,9 @@
+PACKAGE=github.com/chenchun/lctn
+
 all:build
 build:
-	@env GOOS=linux GOARCH=amd64 go build -v -o lctn .
+	@mkdir -p bin
+	@env GOOS=linux GOARCH=amd64 go build -v -o bin/lctn ${PACKAGE}/cmd/lctn
+	@env GOOS=linux GOARCH=amd64 go build -v -o bin/init ${PACKAGE}/cmd/init
 clean:
-	@rm -f lctn
+	@rm -rf bin
