@@ -1,0 +1,11 @@
+sudo: required
+
+language: go
+
+install:
+- mkdir bin && cd bin
+- git clone https://github.com/sstephenson/bats.git && cd bats && sudo ./install.sh /usr/local
+- sudo ln -s /usr/local/libexec/bats /usr/bin/bats && cd ../../
+
+script:
+- make test
