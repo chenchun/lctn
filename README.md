@@ -7,7 +7,7 @@ lctn is a simple command line program to run a process in a linux container. It 
 Be sure to run as a root user since creating namespace requires SYS_ADMIN capability.
 
 ```
-$ go get github.com/chenchun/lctn/flags
+$ go get github.com/chenchun/lctn
 $ cd $GOPATH/src/github.com/chenchun/lctn
 $ make
 github.com/chenchun/lctn
@@ -23,10 +23,11 @@ bin      dev      etc      hello    lib      linuxrc  proc     sbin     sys     
 ```
 
 ```
-lctn [Flags] command [argument ...]
-Flags:
+Usage of ./lctn [Flags] Command [Argument ...]:
   -alsologtostderr
     	log to standard error as well as files
+  -init
+    	is it the init process of container. (This flag is used by lctn internally)
   -log_backtrace_at value
     	when logging hits line file:N, emit a stack trace
   -log_dir string
@@ -41,6 +42,15 @@ Flags:
     	log level for V logs
   -vmodule value
     	comma-separated list of pattern=N settings for file-filtered logging
+
+Command:
+  The init command of container
+
+Argument:
+  the Arguments of container
+
+Examples:
+  lctn -logtostderr -root ./rootfs /bin/sh
 ```
 
 # Note
