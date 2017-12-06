@@ -1,0 +1,3 @@
+package: github.com/chenchun/lctn
+import:
+- package: github.com/golang/glog

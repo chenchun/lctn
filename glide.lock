@@ -1,0 +1,6 @@
+hash: 40fe5631bb47a383f324fc83aaa1d290578b4d1ec172b57449345bf902f92283
+updated: 2017-12-06T18:28:39.918215+08:00
+imports:
+- name: github.com/golang/glog
+  version: 44145f04b68cf362d9c4df2182967c2275eaefed
+testImports: []
