@@ -2,10 +2,19 @@ sudo: required
 
 language: go
 
-install:
-- mkdir bin && cd bin
-- git clone https://github.com/sstephenson/bats.git && cd bats && sudo ./install.sh /usr/local
-- sudo ln -s /usr/local/libexec/bats /usr/bin/bats && cd ../../
+before_install:
+  - uname -a
+  - sudo apt-get -qq update
+  - sudo apt-get install -y autopoint autoconf libtool automake
+  - mkdir bin && cd bin
+  - curl https://www.kernel.org/pub/linux/utils/util-linux/v2.25/util-linux-2.25.tar.gz | tar -zxf-
+  - cd util-linux-2.25
+  - ./configure --without-python --disable-all-programs --enable-nsenter --without-ncurses
+  - make nsenter && sudo cp nsenter /usr/bin
+  - cd ../
+  - git clone https://github.com/sstephenson/bats.git
+  - cd bats && sudo ./install.sh /usr/local
+  - sudo ln -s /usr/local/libexec/bats /usr/bin/bats && cd ../../
 
 script:
 - make test
