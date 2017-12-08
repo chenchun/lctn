@@ -1,4 +1,6 @@
-# lctn
+# Lctn
+
+[![Build Status](https://travis-ci.org/chenchun/lctn.svg?branch=master)](https://travis-ci.org/chenchun/lctn)
 
 lctn is a simple command line program to run a process in a linux container. It focuses on a brief golang code description of how to implement a linux container runtime.
 
@@ -47,7 +49,7 @@ Command:
   The init command of container
 
 Argument:
-  the Arguments of container
+  The Arguments of container
 
 Examples:
   lctn -logtostderr -root ./rootfs /bin/sh
