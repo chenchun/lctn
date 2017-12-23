@@ -32,7 +32,7 @@ func Parent() {
 		Path: os.Args[0],
 		Args: args,
 		SysProcAttr: &syscall.SysProcAttr{
-			Cloneflags: uintptr(syscall.CLONE_NEWNS | syscall.CLONE_NEWNET | syscall.CLONE_NEWIPC | syscall.CLONE_NEWUTS | syscall.CLONE_NEWPID),
+			Cloneflags: uintptr(syscall.CLONE_NEWNS | syscall.CLONE_NEWNET | syscall.CLONE_NEWIPC | syscall.CLONE_NEWUTS | syscall.CLONE_NEWPID | syscall.CLONE_NEWUSER),
 		},
 		Stdin:  os.Stdin,
 		Stdout: os.Stdout,
@@ -41,6 +41,11 @@ func Parent() {
 	if err := cmd.Start(); err != nil {
 		glog.Fatal(err)
 	}
+	go func() {
+		if err := mapUidGid(cmd.Process.Pid); err != nil {
+			glog.Fatal(err)
+		}
+	}()
 	if err := cmd.Wait(); err != nil {
 		glog.Fatal(err)
 	}
