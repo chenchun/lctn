@@ -1,13 +1,13 @@
 #!/bin/bash
 
-function start_container() {
+function setup() {
     bin/lctn -logtostderr -root `pwd`/rootfs /hello &
     wait
 }
 
 function wait() {
     time=0
-    until pid=$(get_pid)
+    until [[ $(get_pid) != "" ]]
     do
         time=$(($time + 1))
         if [ $time -gt 10 ]; then
@@ -17,7 +17,7 @@ function wait() {
     done
 }
 
-function cleanup() {
+function teardown() {
     kill -9 $(get_pid)
 }
 
