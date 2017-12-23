@@ -5,6 +5,7 @@ build:
 	@mkdir -p bin
 	@env GOOS=linux GOARCH=amd64 go build -v -o bin/lctn ${PACKAGE}/cmd/lctn
 	# lctn needs CAP_SYS_ADMIN to create namespaces, CAP_SYS_CHROOT to chroot,
+	# CAP_SETUID/CAP_SETGID to mapping uid/gid of the new userspace.
 	# Please refer to http://man7.org/linux/man-pages/man7/capabilities.7.html
 	@sudo setcap CAP_SYS_ADMIN,CAP_SYS_CHROOT,CAP_SETUID,CAP_SETGID+epi bin/lctn
 test:build
