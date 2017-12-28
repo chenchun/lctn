@@ -62,7 +62,11 @@ func Parent() {
 }
 
 func Child() {
-	if err := Chroot(*flags.RootDir); err != nil {
+	root := *flags.RootDir
+	if err := PrepareDevice(root); err != nil {
+		glog.Fatal(err)
+	}
+	if err := Chroot(root); err != nil {
 		glog.Fatal(err)
 	}
 	if err := Mountfs(); err != nil {

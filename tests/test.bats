@@ -24,3 +24,10 @@ load helper
         fi
     done
 }
+
+@test "test creating devices" {
+    pid=$(get_pid)
+    sudo nsenter -t $pid -m echo 1 > /dev/null
+    message="$(sudo nsenter -t $pid -m cat /dev/null)"
+    [ "$message" = "" ]
+}

@@ -2,6 +2,7 @@ package lctn
 
 import (
 	"os"
+	"path/filepath"
 	"syscall"
 )
 
@@ -30,6 +31,20 @@ func Mountfs() error {
 		return err
 	}
 	if err := syscall.Mount("sysfs", "/sys", "sysfs", uintptr(defaultMountFlags), ""); err != nil {
+		return err
+	}
+	return nil
+}
+
+func PrepareDevice(root string) error {
+	if err := os.MkdirAll("/dev", 0755); err != nil {
+		return err
+	}
+	null := filepath.Join(root, "/dev/null")
+	if _, err := os.Create(null); err != nil {
+		return err
+	}
+	if err := syscall.Mount("/dev/null", null, "", syscall.MS_BIND, ""); err != nil && !os.IsNotExist(err) {
 		return err
 	}
 	return nil
