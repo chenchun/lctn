@@ -30,4 +30,6 @@ load helper
     sudo nsenter -t $pid -m echo 1 > /dev/null
     message="$(sudo nsenter -t $pid -m cat /dev/null)"
     [ "$message" = "" ]
+    message="$(sudo nsenter -t $pid -m cat /proc/mounts | grep null)"
+    [ "$message" = "" ]
 }
