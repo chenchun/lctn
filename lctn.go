@@ -33,6 +33,9 @@ func Parent() {
 		glog.Fatalf("can't create a pipe: %v", err)
 	}
 	defer writer.Close()
+	if err := PrepareDevice(*flags.RootDir); err != nil {
+		glog.Fatal(err)
+	}
 	cmd := exec.Cmd{
 		Path: os.Args[0],
 		Args: args,
@@ -63,9 +66,6 @@ func Parent() {
 
 func Child() {
 	root := *flags.RootDir
-	if err := PrepareDevice(root); err != nil {
-		glog.Fatal(err)
-	}
 	if err := Chroot(root); err != nil {
 		glog.Fatal(err)
 	}
