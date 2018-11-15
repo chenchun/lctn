@@ -9,8 +9,11 @@ import (
 )
 
 var (
-	RootDir = flag.String("root", "", "the root directory of container")
-	Init    = flag.Bool("init", false, "is it the init process of container. (This flag is used by lctn internally)")
+	RootDir    = flag.String("root", "", "the root directory of container")
+	Init       = flag.Bool("init", false, "is it the init process of container. (This flag is used by lctn internally)")
+	CgroupPath = flag.String("cgroup-path", "/lctn", "the path under cgroup root directory")
+	Uid        = flag.Int("uid", os.Getuid(), "host side uid of container user namespace, default current uid")
+	Gid        = flag.Int("gid", os.Getgid(), "host side gid of container user namespace, default current gid")
 )
 
 func InitFlags() {
@@ -35,5 +38,4 @@ Examples:
 	if len(tailArgs) < 1 {
 		glog.Fatal("command required")
 	}
-	glog.V(2).Infof("root %s, command %v", *RootDir, tailArgs)
 }
